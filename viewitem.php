@@ -6,7 +6,9 @@
 <body>
 Hellow world
     
-    Click <a href="index.php">here</a>a> to return to homepage. 
+    <br><Br>
+    
+    Click <a href="index.php">here</a> to return to homepage. 
     
     
     <?php 
