@@ -11,7 +11,7 @@
 <header>
 	<a href="index.php">
         
-<img src="images/shelter_logo.jpg" width="70" height="70"></a>
+
 	<h1>Inventory Database</h1>
 	<?php
 
