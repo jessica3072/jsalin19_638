@@ -1,33 +1,46 @@
-<!DOCTYPE html>
-<html>
-  <head> 
-    <meta charset="UTF-8">
-    </head> 
-<body>
-Welcome to my web site! <br><br><br>
-    
-    Click <a href="viewitem.php">here</a> to view all items. 
-
-
-
-<?php
-session_start();
-
-
+<?php 
 include_once 'includes/header.php';
+    
+$hn = 'localhost';
+$db = 'jsalin19_638';
+$un = 'root';
+$pw = '';
+ 
+$conn = new mysqli($hn, $un, $pw, $db);
+if ($conn->connect_error) die($conn->connect_error);
 
+$query = "SELECT *  
+		FROM image NATURAL JOIN item";
+
+$result = $conn->query($query);
+if (!$result) die($conn->error);
+$rows = $result->num_rows;
 
 
 /*
-$query = "SELECT type
-		FROM item ";
-$result = $conn->query($query);
-if (!$result) die ("Database access failed: " . $conn->error);
-$rows = $result->num_rows;
+echo "<table><tr> <th>Welcome</th> <th>Hello</th><th>Testing</th></tr>";
+while ($row = $result->fetch_assoc()) {
+	echo '<tr>';
+	echo "<td>".$row["fullimage_filepath"]."</td><td>";
+	echo "<a href=\"viewitem.php?id=".$row["closeup_filepath"]."\">".$row["name"]."</a>";
+	echo '</tr>';
+}
+    echo "</table>";
 
-echo "<table><tr> <th>type</th> ";
 
+//how to figure out including images using php?? on local server?
+
+from sumi's index page: <img src='./images/".$randCoffee['img_url']."'>
 */
 
-include_once 'includes/footer.php';
+echo "<p><img src='./images/001fullsize.jpg'><a href='./about.php'></a></p><br/>";
+
+
+
+
+include_once 'includes/footer.php';  
 ?>
+
+
+
+

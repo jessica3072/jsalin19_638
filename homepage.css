@@ -1,0 +1,11 @@
+
+body {
+  background-image: /images/shopimage2.jpg;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+ header {
+  display: block;
+}
