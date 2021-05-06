@@ -1,55 +1,58 @@
 <!DOCTYPE html>
 <html>
-  <head> 
-    <meta charset="UTF-8">
-    </head> 
+<head>
+       <title>Billowy Vintage Archive</title>
+<link rel="stylesheet" href="includes/enter.css">
+</head>
 <body>
-Hello world
-    
-    <br><Br>
-    
-    
-  
-        <br>Click ~here~ to browse items by decade.<br>
-    
-    
-    <br>Click ~here~ to browse items by type.<br>
-    
+
+
+   
+
+    <h3 class="center">billowy vintage archive:<br>individual item page</h3><br>
+
 
     
-    Click <a href="index.php">here</a> to return to homepage. 
+<?php
+session_start();
+
+include_once 'includes/header.php';
+require_once 'includes/functions.php';
+
+$hn = 'localhost';
+$un = 'jsalin19_mysql';
+$pw = 'zATfUZ9xUVEr';
+$db = 'jsalin19_638';
     
-    <div>
-   <a href="/decade">
-            DECADE: 1940s
-          </a>
-        
-      
-        
-          <a href="/decade" class="Mobile-overlay-folder-item">
-            DECADE: 1950S
-          </a>
-        
-      
-        
-          <a href="/decade" class="Mobile-overlay-folder-item">
-           DEACDADE: 1960S
-          </a>
-        
-      
-        
- </div>
-         
-    
-    
-    
-    
-    
-    <?php 
-//  $randQuery = "SELECT * FROM image ORDER BY RAND() LIMIT 1";
-    
-    
+$conn = new mysqli($hn, $un, $pw, $db);
+if ($conn->connect_error) die($conn->connect_error);
+
+
+if (isset($_GET['id'])) {
+	$id = sanitizeMySQL($conn, $_GET['id']);
+	$query = "SELECT * FROM image NATURAL JOIN item WHERE item_id=".$id;
+	$result = $conn->query($query);
+	if (!$result) die ("Invalid item id.");
+	$rows = $result->num_rows;
+	if ($rows == 0) {
+		echo "No item found with id of $id<br>";
+	} else {
+		while ($row = $result->fetch_assoc()) {
+ 
+
+    echo "<span class=\"center\"><img src='images/".$row["fullimage_filepath"]."' height=\"450\" alt=\"item catalog image full size\"><img src='images/".$row["closeup_filepath"]."' height=\"450\" alt=\"item catalog image close up\"></span><br>";
+    echo "<br><b><span class=\"center\">Item Information: </span></b><br><span class=\"center\">".$row["name"]."</span><br>";
+     		}
+	} 
+	echo "<p><a href=\"archive.php\">Return to Gallery of all items</a></p>";
+              }
+
+
+include_once 'includes/footer.php';
 ?>
 
+
+
+    
 </body>
-</html>
+</html> 
